@@ -33,7 +33,6 @@ const AuthProvider = ({children}) => {
     //SignUp social
 
     const signUpGoogle = () => {
-        setLoading(true);
         return signInWithPopup(auth, provider);
     } 
 

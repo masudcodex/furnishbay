@@ -1,13 +1,47 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
+import { AuthContext } from '../../Context/AuthProvider';
+import toast from 'react-hot-toast';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const {user, loginUser, signUpGoogle} = useContext(AuthContext);
+    const [loginError, setLoginError] = useState('');
+    const navigate = useNavigate();
+    const location = useLocation();
+    let from = location.state?.from?.pathname || "/";
 
     const onSubmit = data => {
-        console.log(data);
+        const email = data.email;
+        const password = data.password;
+
+       loginUser(email, password)
+       .then(result=> {
+            const user = result.user;
+            console.log('Currently Logged in', user);
+            toast.success('Login Successful');
+            navigate(from, { replace: true });
+       })
+       .catch(error=>{
+            console.error(error);
+            setLoginError(error.message);
+       })
+    }
+
+    const handleSocialLogin = () => {
+        signUpGoogle()
+        .then(result=> {
+            const user = result.user;
+            console.log(user);
+            toast.success('Login Successful');
+            navigate(from, { replace: true });
+        })
+        .catch(error=> {
+            console.error(error)
+            setLoginError(error.message);
+        })
     }
 
     return (
@@ -43,9 +77,10 @@ const Login = () => {
                     <label className='text-sm text-secondary mt-3 ml-2'><Link>Forgot password?</Link></label>
                     </div>
                     <input type="submit" value="Login" className='btn w-full btn-primary text-white mt-5'/>
+                    {loginError && <p role={alert} className="text-sm text-error mt-2 ml-2">{loginError}</p>}
                 </form>
                 <div className="divider">OR</div>
-                <button className='btn btn-secondary w-full btn-outline'><FcGoogle className='text-2xl mr-3'/>Google</button>
+                <button onClick={handleSocialLogin} className='btn btn-secondary w-full btn-outline'><FcGoogle className='text-2xl mr-3'/>Google</button>
                 <p className='text-sm mt-3 ml-2 text-center'>Don't have an account? <Link to="/signup">Sign up here</Link></p>
             </div>           
         </div>

@@ -43,6 +43,7 @@ const SignUp = () => {
         .then(result=> {
             const user = result.user;
             console.log(user);
+            toast.success("Registration Successful")
         })
         .catch(error=> {
             console.error(error)
