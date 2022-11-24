@@ -1,13 +1,26 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import avatar from '../../Assets/Images/avatar.png';
 import logo from '../../Assets/Images/logo.png';
+import { AuthContext } from '../../Context/AuthProvider';
 
 const Header = () => {
+    const {user, logOutUser} = useContext(AuthContext);
+    const navigate = useNavigate();
+
     const menuItems = <React.Fragment>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/blog">Blog</Link></li>
     </React.Fragment>
+
+    const handleLogOut = () => {
+        logOutUser()
+        .then(()=>{
+            navigate('/');
+        })
+        .catch(error=> console.error(error))
+    }
+
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
@@ -31,16 +44,22 @@ const Header = () => {
             </div>
             <div className="navbar-end">
                 <Link to="/login"><button className='btn btn-sm btn-primary'>Login</button></Link>
-                <div className="dropdown dropdown-end">
-                    <label tabIndex={1} className="btn btn-ghost btn-circle avatar">
-                        <div className="w-8 rounded-full">
-                        <img src={avatar} alt="user"/>
-                        </div>
-                    </label>
-                    <ul tabIndex={1} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                        <li><Link>Logout</Link></li>
-                    </ul>
-                </div>
+                {
+                    user?.uid && 
+                    <div className="dropdown dropdown-end">
+                        <label tabIndex={1} className="btn btn-ghost btn-circle avatar">
+                            <div className="w-8 rounded-full">
+                                {
+                                    user?.photoURL ? <img src={user?.photoURL} alt="user"/> : <img src={avatar} alt="user"/>
+                                }
+                            </div>
+                        </label>
+                        <ul tabIndex={1} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                            <li onClick={handleLogOut}><Link>Logout</Link></li>
+                        </ul>
+                    </div>
+                }
+                
             </div>
         </div>
     );
