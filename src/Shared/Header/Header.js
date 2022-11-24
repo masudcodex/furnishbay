@@ -6,7 +6,7 @@ import logo from '../../Assets/Images/logo.png';
 const Header = () => {
     const menuItems = <React.Fragment>
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/">Blog</Link></li>
+        <li><Link to="/blog">Blog</Link></li>
     </React.Fragment>
     return (
         <div className="navbar bg-base-100">
