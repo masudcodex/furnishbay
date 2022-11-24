@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
+import { AuthContext } from '../../Context/AuthProvider';
 
 const SignUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const {signUpUser, updateUser} = useContext(AuthContext);
 
     const onSubmit = data => {
-        console.log(data);
+        const name = data.name;
+        const email = data.email;
+        const password = data.password;
+        signUpUser(email, password)
+        .then(result=> {
+            const user = result.user;
+            console.log(user);
+        })
+        .catch(error=> console.error(error))
     }
     return (
         <div className='flex items-center my-10'>
