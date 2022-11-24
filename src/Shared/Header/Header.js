@@ -30,7 +30,7 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link><button className='btn btn-sm btn-primary'>Login</button></Link>
+                <Link to="/login"><button className='btn btn-sm btn-primary'>Login</button></Link>
                 <div className="dropdown dropdown-end">
                     <label tabIndex={1} className="btn btn-ghost btn-circle avatar">
                         <div className="w-8 rounded-full">

@@ -4,7 +4,7 @@ import logo from '../../Assets/Images/logo.png';
 
 const Footer = () => {
     return (
-        <footer className="footer px-10 py-4 border-t text-base-content">
+        <footer className="footer px-10 py-4 border-t text-base-content bg-white">
             <div className="items-center grid-flow-col">
                 <img className='w-10 h-10 mr-4' src={logo} alt=""/>
                 <p>Funrnishbay <br/>Providing reliable products since 2022</p>
