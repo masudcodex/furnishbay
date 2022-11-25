@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const AddProduct = () => {
     const {user} = useContext(AuthContext);
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const formData = new FormData();
 
     const handleAddProduct = data => {
@@ -23,6 +24,7 @@ const AddProduct = () => {
                 console.log(img.data.url);
                 const product = {
                     productName: data.productName,
+                    image: img.data.url,
                     originalPrice: data.originalPrice,
                     resalePrice: data.resalePrice,
                     yearsUsed: data.yearsUsed,
@@ -46,6 +48,8 @@ const AddProduct = () => {
                 .then(res=> res.json())
                 .then(data=> {
                     console.log(data);
+                    toast.success("Product added successfully");
+                    reset();
                 })
             }
         })

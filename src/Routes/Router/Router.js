@@ -11,6 +11,7 @@ import MyWishlist from "../../Pages/Dashboard/MyWishlist/MyWishlist";
 import ReportedItems from "../../Pages/Dashboard/ReportedItems/ReportedItems";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
+import Products from "../../Pages/Products/Products/Products";
 import SignUp from "../../Pages/SignUp/SignUp";
 import ErrorPage from "../../Shared/ErrorPage/ErrorPage";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
@@ -27,6 +28,11 @@ const router = createBrowserRouter([
             {
                 path: '/blog',
                 element: <Blog></Blog>
+            },
+            {
+                path: '/categories/:id',
+                loader: async({params})=> fetch(`http://localhost:5000/categories/${params.id}`),
+                element: <Products></Products>
             },
             {
                 path: '/login',
