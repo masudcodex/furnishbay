@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 import bedroomFurniture from '../../../Assets/Images/bedroomFurniture.jpg'
 import diningFurniture from '../../../Assets/Images/Dining furniture.jpg'
 import kitchenFurniture from '../../../Assets/Images/kitchen furniture.jpg'
@@ -22,7 +23,7 @@ const Categories = () => {
                     categories.map(category=> 
                     <div key={category._id} className="w-56 pb-10">
                         <figure>
-                            <img className='w-56 h-[150px] rounded-md' src={category.picture} alt="Shoes" />
+                            <Link to={`/categories/${category.category_id}`}><img className='w-56 h-[150px] rounded-md' src={category.picture} alt="Shoes" /></Link>
                             <div className="flex flex-col items-center mt-3">
                                 <h2 className="card-title">{category.name}</h2>
                             </div>

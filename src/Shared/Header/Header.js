@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import avatar from '../../Assets/Images/avatar.png';
 import logo from '../../Assets/Images/logo.png';
 import { AuthContext } from '../../Context/AuthProvider';
+import { AiOutlineMenuFold } from "react-icons/ai";
 
 const Header = () => {
     const {user, logOutUser} = useContext(AuthContext);
@@ -60,7 +61,7 @@ const Header = () => {
                         </ul>
                     </div>
                 }
-                
+                <label htmlFor="furnishbay-drawer" className="drawer-button mr-2 lg:hidden"><AiOutlineMenuFold className='text-3xl font-extrabold'/></label>   
             </div>
         </div>
     );
