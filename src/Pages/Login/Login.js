@@ -4,14 +4,21 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from '../../Context/AuthProvider';
 import toast from 'react-hot-toast';
+import JwtToken from '../../Components/Hooks/JwtToken/JwtToken';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const {user, loginUser, signUpGoogle} = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
+    const [userEmail, setUserEmail] = useState('');
+    const [token] = JwtToken(userEmail);
     const navigate = useNavigate();
     const location = useLocation();
     let from = location.state?.from?.pathname || "/";
+
+    if (token) {
+        navigate(from, { replace: true });
+    }
 
     const onSubmit = data => {
         const email = data.email;
@@ -22,7 +29,7 @@ const Login = () => {
             const user = result.user;
             console.log('Currently Logged in', user);
             toast.success('Login Successful');
-            navigate(from, { replace: true });
+            setUserEmail(email);
        })
        .catch(error=>{
             console.error(error);
@@ -31,16 +38,37 @@ const Login = () => {
     }
 
     const handleSocialLogin = () => {
+        const role = 'user';
         signUpGoogle()
         .then(result=> {
             const user = result.user;
             console.log(user);
             toast.success('Login Successful');
-            navigate(from, { replace: true });
+            saveUserToDatabase(user.displayName, user.email, role);
+            setUserEmail(user.email);
         })
         .catch(error=> {
             console.error(error)
             setLoginError(error.message);
+        })
+    }
+
+    const saveUserToDatabase = (name, email, role) => {
+        const user = {
+            userName: name,
+            email: email,
+            role: role
+        }
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        .then(res=> res.json())
+        .then(data=> {
+            console.log(data);
         })
     }
 
