@@ -7,8 +7,8 @@ import toast from 'react-hot-toast';
 import JwtToken from '../../Components/Hooks/JwtToken/JwtToken';
 
 const SignUp = () => {
-    const {user, register, formState: { errors }, handleSubmit, reset } = useForm();
-    const {signUpUser, updateUser, signUpGoogle} = useContext(AuthContext);
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
+    const {user, signUpUser, updateUser, signUpGoogle} = useContext(AuthContext);
     const [signUpError, setSignUpError] = useState('');
     const [userEmail, setUserEmail] = useState('');
     const navigate = useNavigate();

@@ -1,9 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
-import bedroomFurniture from '../../../Assets/Images/bedroomFurniture.jpg'
-import diningFurniture from '../../../Assets/Images/Dining furniture.jpg'
-import kitchenFurniture from '../../../Assets/Images/kitchen furniture.jpg'
 import Loader from '../../../Shared/Loader/Loader';
 
 const Categories = () => {
@@ -29,8 +26,7 @@ const Categories = () => {
                             </div>
                         </figure>
                     </div>)
-                }
-                
+                }  
             </div>
         </div>
     );
