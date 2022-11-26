@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 import JwtToken from '../../Components/Hooks/JwtToken/JwtToken';
 
 const Login = () => {
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const {user, loginUser, signUpGoogle} = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
     const [userEmail, setUserEmail] = useState('');
@@ -30,6 +30,7 @@ const Login = () => {
             console.log('Currently Logged in', user);
             toast.success('Login Successful');
             setUserEmail(email);
+            reset();
        })
        .catch(error=>{
             console.error(error);
@@ -39,12 +40,13 @@ const Login = () => {
 
     const handleSocialLogin = () => {
         const role = 'user';
+        const isVerified = false;
         signUpGoogle()
         .then(result=> {
             const user = result.user;
             console.log(user);
             toast.success('Login Successful');
-            saveUserToDatabase(user.displayName, user.email, role);
+            saveUserToDatabase(user.displayName, user.email, role, isVerified);
             setUserEmail(user.email);
         })
         .catch(error=> {

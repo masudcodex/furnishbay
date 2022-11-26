@@ -32,7 +32,7 @@ const router = createBrowserRouter([
             {
                 path: '/categories/:id',
                 loader: async({params})=> fetch(`http://localhost:5000/categories/${params.id}`),
-                element: <Products></Products>
+                element: <PrivateRoute><Products></Products></PrivateRoute>
             },
             {
                 path: '/login',

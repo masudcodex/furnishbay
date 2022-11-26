@@ -7,8 +7,8 @@ import toast from 'react-hot-toast';
 import JwtToken from '../../Components/Hooks/JwtToken/JwtToken';
 
 const SignUp = () => {
-    const { register, formState: { errors }, handleSubmit } = useForm();
-    const {user, signUpUser, updateUser, signUpGoogle} = useContext(AuthContext);
+    const {user, register, formState: { errors }, handleSubmit, reset } = useForm();
+    const {signUpUser, updateUser, signUpGoogle} = useContext(AuthContext);
     const [signUpError, setSignUpError] = useState('');
     const [userEmail, setUserEmail] = useState('');
     const navigate = useNavigate();
@@ -26,6 +26,7 @@ const SignUp = () => {
         const email = data.email;
         const password = data.password;
         const role = data.role;
+        const isVerified = false;
         signUpUser(email, password)
         .then(result=> {
             const user = result.user;
@@ -36,7 +37,9 @@ const SignUp = () => {
             }
             updateUser(userInfo)
             .then(()=>{
-                saveUserToDatabase(name, email, role);
+                saveUserToDatabase(name, email, role, isVerified);
+                setUserEmail(email);
+                reset();
             })
             .catch(error=> {
                 console.error(error)
@@ -52,12 +55,13 @@ const SignUp = () => {
     const handleSocialLogin = () => {
         setSignUpError('')
         const role = 'user';
+        const isVerified = false;
         signUpGoogle()
         .then(result=> {
             const user = result.user;
             console.log(user);
             toast.success("Registration Successful");
-            saveUserToDatabase(user.displayName, user.email, role);
+            saveUserToDatabase(user.displayName, user.email, role, isVerified);
             setUserEmail(user.email);
         })
         .catch(error=> {
@@ -66,11 +70,12 @@ const SignUp = () => {
         })
     }
 
-    const saveUserToDatabase = (name, email, role) => {
+    const saveUserToDatabase = (name, email, role, isVerified) => {
         const user = {
             userName: name,
             email: email,
-            role: role
+            role: role,
+            isVerified: isVerified
         }
         fetch('http://localhost:5000/users', {
             method: 'POST',
