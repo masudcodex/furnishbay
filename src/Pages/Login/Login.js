@@ -4,14 +4,14 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from '../../Context/AuthProvider';
 import toast from 'react-hot-toast';
-import JwtToken from '../../Components/Hooks/JwtToken/JwtToken';
+import useToken from '../../Components/Hooks/useToken';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const {user, loginUser, signUpGoogle} = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
     const [userEmail, setUserEmail] = useState('');
-    const [token] = JwtToken(userEmail);
+    const [token] = useToken(userEmail);
     const navigate = useNavigate();
     const location = useLocation();
     let from = location.state?.from?.pathname || "/";
@@ -71,6 +71,7 @@ const Login = () => {
         .then(res=> res.json())
         .then(data=> {
             console.log(data);
+            setUserEmail(email)
         })
     }
 

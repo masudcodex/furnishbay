@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-const JwtToken = email => {
+const useToken = email => {
     const [token, setToken] = useState('');
     useEffect(()=>{
         if (email) {
@@ -8,7 +8,7 @@ const JwtToken = email => {
             .then(res=>res.json())
             .then(data=>{
                 if (data.accessToken) {
-                    localStorage.setItem('furnishbayToken', data.accessToken);
+                    localStorage.setItem('accessToken', data.accessToken);
                     setToken(data.accessToken);
                 }
             })
@@ -16,4 +16,4 @@ const JwtToken = email => {
     },[email])
     return [token];
 }
-export default JwtToken;
+export default useToken;

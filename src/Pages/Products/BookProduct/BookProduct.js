@@ -1,8 +1,42 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
-const BookProduct = ({user, productInfo}) => {
+const BookProduct = ({user, productInfo, setProductInfo, revalidator}) => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
+    const navigate = useNavigate();
+
+    const bookingSubmit = data => {
+        console.log(data);
+        const bookedProduct = {
+            id: productInfo._id,
+            productName: productInfo.productName,
+            price: productInfo.resalePrice,
+            userName: data.name,
+            email: data.email,
+            phone: data.phone,
+            meetingLocation: data.meetingLocation
+        }
+        fetch('http://localhost:5000/booked', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('furnishbayToken')}`
+            },
+            body: JSON.stringify(bookedProduct)
+        })
+        .then(res=> res.json())
+        .then(data=> {
+            console.log(data);
+            if(data.acknowledged){
+                toast.success('Product is booked successfully')
+                setProductInfo(null);
+                revalidator.revalidate();
+            }
+        })
+        reset();
+    }
 
     return (
         <>
@@ -10,7 +44,7 @@ const BookProduct = ({user, productInfo}) => {
             <div className="modal">
             <div className="modal-box relative">
                 <label htmlFor="booking-modal" className="btn btn-sm btn-error text-white btn-circle absolute right-2 top-2">✕</label>
-                <form>
+                <form onSubmit={handleSubmit(bookingSubmit)}>
                     <div className="form-control mb-2">
                         <label className="label">
                             <span className="label-text">User name</span>

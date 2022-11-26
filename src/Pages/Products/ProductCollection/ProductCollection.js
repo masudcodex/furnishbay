@@ -23,10 +23,11 @@ const ProductCollection = ({product, setProductInfo}) => {
                 <div className='flex mt-5 lg:mt-0 lg:flex-col justify-between'>
                     <button className="btn btn-sm lg:btn-xs btn-primary text-white">Add to wishlist</button>
                     <label 
+                    disabled={product.status === 'booked'}
                     htmlFor="booking-modal" 
                     className="btn btn-sm btn-secondary text-white"
                     onClick={()=>setProductInfo(product)}
-                    >Book Now</label>
+                    >{product.status === 'booked' ? 'Booked' : 'Book now'}</label>
                 </div>
             </div>
         </div>

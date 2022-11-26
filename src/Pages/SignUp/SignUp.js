@@ -4,21 +4,21 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from '../../Context/AuthProvider';
 import toast from 'react-hot-toast';
-import JwtToken from '../../Components/Hooks/JwtToken/JwtToken';
+import useToken from '../../Components/Hooks/useToken';
 
 const SignUp = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const {user, signUpUser, updateUser, signUpGoogle} = useContext(AuthContext);
     const [signUpError, setSignUpError] = useState('');
     const [userEmail, setUserEmail] = useState('');
+    const [token] = useToken(userEmail);
     const navigate = useNavigate();
-    const [token] = JwtToken(userEmail);
-    
-    
     
     if (token) {
-        navigate("/");
+        navigate('/');
     }
+    
+    
 
     const onSubmit = data => {
         setSignUpError('')
@@ -87,8 +87,14 @@ const SignUp = () => {
         .then(res=> res.json())
         .then(data=> {
             console.log(data);
+            setUserEmail(email)
         })
     }
+
+
+
+
+
     return (
         <div className='flex items-center my-10'>
             <div className='md:w-4/12 bg-white p-7 mx-auto shadow-lg rounded-lg'>
