@@ -51,11 +51,11 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/dashboard/allusers',
-                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+                element: <AllUsers></AllUsers>
             },
             {
                 path: '/dashboard/allsellers',
-                element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
+                element: <AllSellers></AllSellers>
             },
             {
                 path: '/dashboard/reporteditems',

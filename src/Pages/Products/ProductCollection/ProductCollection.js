@@ -1,17 +1,55 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { IoLocationSharp } from "react-icons/io5";
 import { BsCheckCircleFill } from "react-icons/bs";
 import useSeller from '../../../Components/Hooks/useSeller/useSeller';
+import { FaRegHeart } from "react-icons/fa";
+import toast from 'react-hot-toast';
+import { AuthContext } from '../../../Context/AuthProvider';
 
-const ProductCollection = ({product, setProductInfo, user}) => {
-    const [isSeller] = useSeller(user?.email)
+const ProductCollection = ({product, setProductInfo}) => {
+    const {user} = useContext(AuthContext);
+    const [value, setValue] = useState(false);
+    const [isSeller] = useSeller(user?.email);
+    const handleReport = (product) => {
+        const reported = {
+            productId: product._id,
+            image: product.image,
+            productName: product.productName,
+            sellerName: product.sellerName,
+            sellerEmail: product.sellerEmail,
+            phone: product.phone,
+            //User who submitted the report
+            userEmail: user.email,
+            isFeatured: product.isFeatured
+
+        }
+        fetch('http://localhost:5000/reportedproduct',{
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            },
+            body: JSON.stringify(reported)
+        })
+        .then(res=> res.json())
+        .then(data=> {
+            console.log(data);
+            if (data.acknowledged) {
+                toast.success('Item is reported')
+                setValue(true);
+            }else if(data.message){
+                toast.error(data.message)
+            }
+        
+        })
+    }
     return (
         <div className="bg-white w-10/12 rounded-md shadow-lg flex flex-col lg:flex-row">
             <div className='w-full lg:w-1/4'>
                 <img className='w-full lg:w-[500px] lg:h-[200px]' src={product.image} alt="" />
             </div>
             <div className='w-full lg:w-3/4 p-4 flex flex-col lg:flex-row justify-between'>
-                <div className='lg:w-9/12'>
+                <div>
                     <h2 className='text-2xl font-semibold mb-1'>{product.productName}</h2>
                     <p className='text-sm font-semibold mb-1 flex items-center'>Seller: {product.sellerName}</p>
                     <p className='flex items-center mb-1 justify-start'><IoLocationSharp className='mr-1 text-xl text-secondary'/> {product.location}</p>
@@ -22,8 +60,13 @@ const ProductCollection = ({product, setProductInfo, user}) => {
                     <p className='mb-1'><b>Years of use: </b>{product.yearsUsed} {product.yearsUsed >= 2 ? 'years' : 'year'}</p>
                     <p className='text-sm'>Post created on {product.posted_time}</p>
                 </div>
-                <div className='lg:w-3/12 flex mt-5 lg:mt-0 lg:flex-col justify-between'>
-                    <button className="btn btn-sm lg:btn-xs btn-primary text-white" disabled={isSeller === true}>Add to wishlist</button>
+                <div className='flex mt-5 lg:mt-0 lg:flex-col justify-between'>
+                    <div className='flex items-center justify-around'>
+                        <span className="tooltip tooltip-secondary" data-tip="Add to wishlist">
+                            <FaRegHeart className='text-xl' disabled={isSeller === true}/>
+                        </span>
+                        <button onClick={()=>handleReport(product)} disabled={value} className='btn btn-xs btn-error rounded-full text-white'>Report</button>
+                    </div>
                     <label 
                     disabled={isSeller === true}
                     htmlFor="booking-modal" 

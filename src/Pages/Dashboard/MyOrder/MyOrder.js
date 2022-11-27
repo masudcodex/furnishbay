@@ -8,7 +8,11 @@ const MyOrder = () => {
     const {data: bookedProducts=[], isLoading, refetch} = useQuery({
         queryKey: ['email', 'bookedProducts'],
         queryFn: async()=> 
-            fetch(`http://localhost:5000/user/${user?.email}`)
+            fetch(`http://localhost:5000/user/${user?.email}`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
             .then(res=>res.json())
     })
 
