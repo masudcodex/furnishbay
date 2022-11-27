@@ -9,6 +9,7 @@ const BookProduct = ({user, productInfo, setProductInfo, revalidator}) => {
         console.log(data);
         const bookedProduct = {
             productId: productInfo._id,
+            image: productInfo.image,
             productName: productInfo.productName,
             price: productInfo.resalePrice,
             userName: data.name,

@@ -108,7 +108,7 @@ const MyProducts = () => {
                     
                     </tbody>
                 </table>
-                </div>
+            </div>
         </div>
     );
 };
