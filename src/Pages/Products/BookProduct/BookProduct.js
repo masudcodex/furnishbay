@@ -8,7 +8,7 @@ const BookProduct = ({user, productInfo, setProductInfo, revalidator}) => {
     const bookingSubmit = data => {
         console.log(data);
         const bookedProduct = {
-            id: productInfo._id,
+            productId: productInfo._id,
             productName: productInfo.productName,
             price: productInfo.resalePrice,
             userName: data.name,

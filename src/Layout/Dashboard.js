@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import useAdmin from '../Components/Hooks/useAdmin/useAdmin';
+import { AuthContext } from '../Context/AuthProvider';
 import Footer from '../Shared/Footer/Footer';
 import Header from '../Shared/Header/Header';
 
 const Dashboard = () => {
+    const {user} = useContext(AuthContext);
+    const [isAdmin, adminLoading] = useAdmin(user?.email);
+    console.log(isAdmin);
+    const [admin, setAdmin] = useState('');
+    // if(isAdmin){
+    //     setAdmin(isAdmin)
+    // }
     return (
         <div>
             <Header></Header>

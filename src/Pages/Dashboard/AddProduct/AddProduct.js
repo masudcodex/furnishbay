@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const AddProduct = () => {
     const {user} = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const navigate= useNavigate();
     const formData = new FormData();
 
     const handleAddProduct = data => {
@@ -35,7 +37,8 @@ const AddProduct = () => {
                     sellerEmail: user.email,
                     phone: data.phone,
                     posted_time: date.toDateString(),
-                    status: "available"
+                    status: "available",
+                    isFeatured: false
                 }
                 //Save products to database
                 fetch('http://localhost:5000/products',{
@@ -49,8 +52,11 @@ const AddProduct = () => {
                 .then(res=> res.json())
                 .then(data=> {
                     console.log(data);
-                    toast.success("Product added successfully");
-                    reset();
+                    if (data.acknowledged) {
+                        toast.success("Product added successfully");
+                        reset();
+                        navigate('/dashboard/myproducts')
+                    }
                 })
             }
         })

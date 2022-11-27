@@ -52,7 +52,6 @@ const AllSellers = () => {
                 refetch();
             }
         })
-        console.log(id);
     }
 
     return (

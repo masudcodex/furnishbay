@@ -7,6 +7,7 @@ import { AiOutlineMenuFold } from "react-icons/ai";
 
 const Header = () => {
     const {user, logOutUser} = useContext(AuthContext);
+
     const navigate = useNavigate();
 
     const menuItems = <React.Fragment>

@@ -14,6 +14,7 @@ import Login from "../../Pages/Login/Login";
 import Products from "../../Pages/Products/Products/Products";
 import SignUp from "../../Pages/SignUp/SignUp";
 import ErrorPage from "../../Shared/ErrorPage/ErrorPage";
+import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
@@ -50,11 +51,11 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/dashboard/allusers',
-                element: <AllUsers></AllUsers>
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
             },
             {
                 path: '/dashboard/allsellers',
-                element: <AllSellers></AllSellers>
+                element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
             },
             {
                 path: '/dashboard/reporteditems',
