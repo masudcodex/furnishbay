@@ -55,11 +55,12 @@ const Login = () => {
         })
     }
 
-    const saveUserToDatabase = (name, email, role) => {
+    const saveUserToDatabase = (name, email, role, isVerified) => {
         const user = {
             userName: name,
             email: email,
-            role: role
+            role: role,
+            isVerified: isVerified
         }
         fetch('http://localhost:5000/users', {
             method: 'POST',

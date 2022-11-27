@@ -1,11 +1,9 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
 
 const BookProduct = ({user, productInfo, setProductInfo, revalidator}) => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
-    const navigate = useNavigate();
 
     const bookingSubmit = data => {
         console.log(data);
