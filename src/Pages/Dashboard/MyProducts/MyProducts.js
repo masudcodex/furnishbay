@@ -10,7 +10,7 @@ const MyProducts = () => {
     const {data: products=[0], isLoading, refetch} = useQuery({
         queryKey: ['email'],
         queryFn: async()=> 
-            fetch(`http://localhost:5000/seller/${user?.email}`,{
+            fetch(`https://furnishbay-server.vercel.app/seller/${user?.email}`,{
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -24,7 +24,7 @@ const MyProducts = () => {
 
     const handleAddAdvertise = (id)=> {
         console.log(id);
-        fetch(`http://localhost:5000/products/${id}`,{
+        fetch(`https://furnishbay-server.vercel.app/products/${id}`,{
             method: 'PUT',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -41,7 +41,7 @@ const MyProducts = () => {
     }
 
     const handleDeleteProduct= id => {
-        fetch(`http://localhost:5000/products/${id}`, {
+        fetch(`https://furnishbay-server.vercel.app/products/${id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

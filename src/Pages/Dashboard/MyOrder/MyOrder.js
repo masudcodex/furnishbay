@@ -3,14 +3,13 @@ import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
 import Loader from '../../../Shared/Loader/Loader';
-import MyProducts from '../MyProducts/MyProducts';
 
 const MyOrder = () => {
     const {user} = useContext(AuthContext);
-    const {data: bookedProducts=[], isLoading, refetch} = useQuery({
+    const {data: bookedProducts=[], isLoading} = useQuery({
         queryKey: ['email', 'bookedProducts'],
         queryFn: async()=> 
-            fetch(`http://localhost:5000/user/${user?.email}`, {
+            fetch(`https://furnishbay-server.vercel.app/user/${user?.email}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }

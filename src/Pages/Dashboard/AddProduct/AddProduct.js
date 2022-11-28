@@ -41,7 +41,7 @@ const AddProduct = () => {
                     isFeatured: false
                 }
                 //Save products to database
-                fetch('http://localhost:5000/products',{
+                fetch('https://furnishbay-server.vercel.app/products',{
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',

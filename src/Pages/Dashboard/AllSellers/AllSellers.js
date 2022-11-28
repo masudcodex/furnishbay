@@ -8,7 +8,7 @@ const AllSellers = () => {
     const {data: sellers=[], isLoading, refetch} = useQuery({
         queryKey: ['sellers'],
         queryFn: async()=> 
-            fetch('http://localhost:5000/sellers',{
+            fetch('https://furnishbay-server.vercel.app/sellers',{
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -21,7 +21,7 @@ const AllSellers = () => {
     }
 
     const handleVerify = id => {
-        fetch(`http://localhost:5000/sellers/${id}`,{
+        fetch(`https://furnishbay-server.vercel.app/sellers/${id}`,{
             method: 'PUT',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -38,7 +38,7 @@ const AllSellers = () => {
     }
 
     const handleDeleteUser= id => {
-        fetch(`http://localhost:5000/sellers/${id}`, {
+        fetch(`https://furnishbay-server.vercel.app/sellers/${id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

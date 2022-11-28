@@ -1,4 +1,3 @@
-import { async } from "@firebase/util";
 import { createBrowserRouter } from "react-router-dom";
 import Dashboard from "../../Layout/Dashboard";
 import Main from "../../Layout/Main";
@@ -18,7 +17,6 @@ import Products from "../../Pages/Products/Products/Products";
 import SignUp from "../../Pages/SignUp/SignUp";
 import ErrorPage from "../../Shared/ErrorPage/ErrorPage";
 import RouteError from "../../Shared/RouteError/RouteError";
-import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
@@ -37,7 +35,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/categories/:id',
-                loader: async({params})=> fetch(`http://localhost:5000/categories/${params.id}`),
+                loader: async({params})=> fetch(`https://furnishbay-server.vercel.app/categories/${params.id}`),
                 element: <PrivateRoute><Products></Products></PrivateRoute>
             },
             {
@@ -89,7 +87,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/payment/:id',
-                loader: async({params})=> fetch(`http://localhost:5000/products/payment/${params.id}`),
+                loader: async({params})=> fetch(`https://furnishbay-server.vercel.app/products/payment/${params.id}`),
                 element: <Payment></Payment>
             }
         ]

@@ -17,7 +17,7 @@ const BookProduct = ({user, productInfo, setProductInfo, revalidator}) => {
             phone: data.phone,
             meetingLocation: data.meetingLocation
         }
-        fetch('http://localhost:5000/booked', {
+        fetch('https://furnishbay-server.vercel.app/booked', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

@@ -7,7 +7,7 @@ const ReportedItems = () => {
     const {data: reportedProducts=[], isLoading, refetch} = useQuery({
         queryKey: ['reportedProducts'],
         queryFn: async()=> 
-            fetch('http://localhost:5000/reportedproducts')
+            fetch('https://furnishbay-server.vercel.app/reportedproducts')
             .then(res=>res.json())
     })
 
@@ -17,7 +17,7 @@ const ReportedItems = () => {
 
     const handleDelete = id => {
         console.log(id);
-        fetch(`http://localhost:5000/reportedproducts/${id}`,{
+        fetch(`https://furnishbay-server.vercel.app/reportedproducts/${id}`,{
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

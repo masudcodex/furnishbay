@@ -6,7 +6,7 @@ const AllUsers = () => {
     const {data: users=[], isLoading} = useQuery({
         queryKey: ['users'],
         queryFn: async()=> 
-            fetch('http://localhost:5000/users',{
+            fetch('https://furnishbay-server.vercel.app/users',{
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }

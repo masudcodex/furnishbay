@@ -16,7 +16,7 @@ const FeaturedItems = () => {
 
     const {data: products=[], isLoading, refetch} = useQuery({
         queryKey: ['products'],
-        queryFn: async()=> fetch('http://localhost:5000/products')
+        queryFn: async()=> fetch('https://furnishbay-server.vercel.app/products')
                         .then(res=> res.json())
     })
     if (isLoading) {

@@ -6,7 +6,7 @@ import Loader from '../../../Shared/Loader/Loader';
 const Categories = () => {
     const {data: categories = [], isLoading, refetch} = useQuery({
         queryKey: 'categories',
-        queryFn: async()=> fetch('http://localhost:5000/categories')
+        queryFn: async()=> fetch('https://furnishbay-server.vercel.app/categories')
         .then(res=> res.json())
     })
     if (isLoading) {

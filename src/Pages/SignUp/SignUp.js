@@ -77,7 +77,7 @@ const SignUp = () => {
             role: role,
             isVerified: isVerified
         }
-        fetch('http://localhost:5000/users', {
+        fetch('https://furnishbay-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

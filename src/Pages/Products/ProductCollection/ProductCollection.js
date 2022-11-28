@@ -25,7 +25,7 @@ const ProductCollection = ({product, setProductInfo}) => {
             isFeatured: product.isFeatured
 
         }
-        fetch('http://localhost:5000/reportedproduct',{
+        fetch('https://furnishbay-server.vercel.app/reportedproduct',{
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
