@@ -46,9 +46,8 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to="/login"><button className='btn btn-sm btn-primary'>Login</button></Link>
                 {
-                    user?.uid && 
+                    user?.uid ? 
                     <div className="dropdown dropdown-end">
                         <label tabIndex={1} className="btn btn-ghost btn-circle avatar">
                             <div className="w-8 rounded-full">
@@ -58,9 +57,11 @@ const Header = () => {
                             </div>
                         </label>
                         <ul tabIndex={1} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                            <li className='text-sm font-semibold'><Link>Welcome {user?.displayName}</Link></li>
                             <li onClick={handleLogOut}><Link>Logout</Link></li>
                         </ul>
-                    </div>
+                    </div> :
+                    <Link to="/login"><button className='btn btn-sm btn-primary'>Login</button></Link>
                 }
                 <label htmlFor="furnishbay-drawer" className="drawer-button mr-2 lg:hidden"><AiOutlineMenuFold className='text-3xl font-extrabold'/></label>   
             </div>

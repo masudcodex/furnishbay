@@ -5,11 +5,13 @@ import useSeller from '../../../Components/Hooks/useSeller/useSeller';
 import { FaRegHeart } from "react-icons/fa";
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../Context/AuthProvider';
+import useAdmin from '../../../Components/Hooks/useAdmin/useAdmin';
 
 const ProductCollection = ({product, setProductInfo}) => {
     const {user} = useContext(AuthContext);
     const [value, setValue] = useState(false);
     const [isSeller] = useSeller(user?.email);
+    const [isAdmin] = useAdmin(user?.email);
     const handleReport = (product) => {
         const reported = {
             productId: product._id,
@@ -68,7 +70,7 @@ const ProductCollection = ({product, setProductInfo}) => {
                         <button onClick={()=>handleReport(product)} disabled={value} className='btn btn-xs btn-error rounded-full text-white'>Report</button>
                     </div>
                     <label 
-                    disabled={isSeller === true}
+                    disabled={isSeller === true || isAdmin === true}
                     htmlFor="booking-modal" 
                     className="btn btn-sm btn-secondary text-white"
                     onClick={()=>setProductInfo(product)}

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useRevalidator } from 'react-router-dom';
+import useAdmin from '../../../Components/Hooks/useAdmin/useAdmin';
 import useSeller from '../../../Components/Hooks/useSeller/useSeller';
 import { AuthContext } from '../../../Context/AuthProvider';
 import Loader from '../../../Shared/Loader/Loader';
@@ -11,6 +12,7 @@ const FeaturedItems = () => {
     const [productInfo, setProductInfo] = useState(null);
     const revalidator = useRevalidator();
     const [isSeller] = useSeller(user?.email);
+    const [isAdmin] = useAdmin(user?.email);
 
     const {data: products=[], isLoading, refetch} = useQuery({
         queryKey: ['products'],
@@ -49,7 +51,7 @@ const FeaturedItems = () => {
                             <div className="card-actions justify-between items-center mt-3">
                                 <div className="text-primary font-semibold">Resale Price: ${product.resalePrice}</div> 
                                 <label 
-                                disabled={isSeller === true}
+                                disabled={isSeller === true || isAdmin === true}
                                 htmlFor="booking-modal" 
                                 className="btn btn-sm btn-secondary text-white"
                                 onClick={()=>setProductInfo(product)}

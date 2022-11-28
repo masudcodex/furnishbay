@@ -108,7 +108,7 @@ const CheckoutForm = ({product, user}) => {
     
   }
     return (
-      <>
+      <div className='w-6/12 bg-white p-5 rounded-lg'>
         <form onSubmit={handleSubmit}>
           <CardElement
             options={{
@@ -126,7 +126,7 @@ const CheckoutForm = ({product, user}) => {
               },
             }}
           />
-          <button className='btn btn-secondary w-full my-4 btn-sm text-white' type="submit" disabled={!stripe || !clientSecret || loading}>
+          <button className='btn btn-secondary w-full mt-4 btn-sm text-white' type="submit" disabled={!stripe || !clientSecret || loading}>
             Pay
           </button>
           <p className="text-red-500">{cardError}</p>
@@ -138,7 +138,7 @@ const CheckoutForm = ({product, user}) => {
             <p>Your transaction id: {transactionId}</p>
           </span>
         }
-      </>
+      </div>
         
     );
 };
