@@ -23,7 +23,7 @@ const FeaturedItems = () => {
     return (
         <>
             {
-                products.length && 
+                products.length >= 1 && 
                 <div className='py-5 bg-white'>
                 <h2 className='text-3xl font-bold mt-5 ml-6'>Featured Products</h2>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10 justify-items-center mx-6'>

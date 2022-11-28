@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
 import Loader from '../../../Shared/Loader/Loader';
 
@@ -56,7 +57,9 @@ const MyOrder = () => {
                                     {product.meetingLocation}
                                 </td>
                                 <th>
-                                    <button className= 'btn btn-secondary btn-xs text-white'>Pay now</button>
+                                    {
+                                        product.status === 'paid' ? <button className= 'btn btn-secondary btn-xs text-white' disabled>Paid</button> : <Link to={`/dashboard/payment/${product._id}`}><button className= 'btn btn-secondary btn-xs text-white'>Pay now</button></Link> 
+                                    }
                                 </th>
                             </tr>)
                         }
