@@ -3,14 +3,14 @@
 ## A website to buy and sell used furniture's.
 
 ## Features
-    - A seller can post a product, manage his/her own product by Deleting or make it featured item though the Advertise option from Dashboard.
-    - A user can book a product and pay it later from the Booked item list
-    - An admin can remove sellers and reported products
-    - Other (Coming soon)
+  - A seller can post a product, manage his/her own product by Deleting or make it featured item though the Advertise option from Dashboard.
+  - A user can book a product and pay it later from the Booked item list
+  - An admin can remove sellers and reported products
+  - Other (Coming soon)
 
 ### Live project link - https://furnishbay-d0a89.web.app
 ### Client side gitHub repository link - https://github.com/programming-hero-web-course-4/b612-used-products-resale-clients-side-masudcodex.git
-### Server side gitHub repository link - https://github.com/programming-hero-web-course-4/b612-used-products-resale-server-side-masudcodex.git
+### Server side gitHub repository link - https://github.com/masudcodex/furnishbay-server.git
 
 ## For testing the site temporary access: 
 ### Admin Email: admin@gmail.com
