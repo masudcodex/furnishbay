@@ -9,7 +9,7 @@
   - Other (Coming soon)
 
 ### Live project link - https://furnishbay-d0a89.web.app
-### Client side gitHub repository link - https://github.com/programming-hero-web-course-4/b612-used-products-resale-clients-side-masudcodex.git
+### Client side gitHub repository link - https://github.com/masudcodex/furnishbay.git
 ### Server side gitHub repository link - https://github.com/masudcodex/furnishbay-server.git
 
 ## For testing the site temporary access: 
@@ -37,6 +37,6 @@
   
 Follow the following steps to get development environment running.
 
-  - git clone https://github.com/programming-hero-web-course-4/b612-used-products-resale-clients-side-masudcodex.git - to clone the repository from github
+  - git clone https://github.com/masudcodex/furnishbay.git - to clone the repository from github
   - npm install - to install node modules
   - npm start - to continue building applications
